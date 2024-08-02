@@ -10,7 +10,4 @@ jobs:
           fetch-depth: 0
       - run: |
           git diff origin/${{ github.base_ref }}..HEAD > diff.txt
-          echo "🔍 The changes in the pull request are: $(cat diff.txt)"
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "📦 The ${{ github.base_ref }} base refrence and ${{ github.head_ref }}"
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          cat diff.txt >> $GITHUB_STEP_SUMMARY
