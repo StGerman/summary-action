@@ -9,5 +9,5 @@ jobs:
         with:
           fetch-depth: 0
       - run: |
-          git diff origin/${{ github.base_ref }}..HEAD > diff.txt
-          cat diff.txt >> $GITHUB_STEP_SUMMARY
+          git diff --patch-with-raw --raw --minimal --compact-summary origin/${{ github.base_ref }}..HEAD > diff.txt
+          echo " ## Pull Request Diff ```diff  $(cat diff.txt)```" >> $GITHUB_STEP_SUMMARY
