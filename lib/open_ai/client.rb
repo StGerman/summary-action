@@ -5,7 +5,13 @@ require "faraday"
 module OpenAI
   # Create a Client for OpenAI API base on Faraday gem
   class Client < Faraday::Connection
-    OPENAI_API_KEY = ENV.fetch("OPENAI_API_KEY").freeze
+    ApiKeyNotSet = Class.new(StandardError) do
+      def message
+        "OPENAI_API_KEY is not set"
+      end
+    end
+
+    OPENAI_API_KEY = ENV.fetch("OPENAI_API_KEY", nil).freeze
     MODEL = "gpt-4o-mini"
     # Initialize the client with the API key
     def initialize
