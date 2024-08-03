@@ -7,6 +7,7 @@ gemspec
 
 gem "rake"
 gem "rspec"
+gem "rspec-github", require: false
 gem "rubocop"
 gem "rubocop-rake"
 gem "rubocop-rspec"
