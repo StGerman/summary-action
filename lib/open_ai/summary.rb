@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "client"
+
 module OpenAI
   # Create a Summary from the OpenAI API
   class Summary < Client

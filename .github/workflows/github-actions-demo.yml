@@ -12,7 +12,7 @@ jobs:
           fetch-depth: 0
       - name: Get the diff
         id: diff
-        run: echo "summary_input='`git diff --patch-with-raw --raw --minimal --compact-summary ${{ github.event.before }} ${{ github.sha }}`'" >> $GITHUB_ENV
+        run: echo "summary_input='`git diff --patch-with-raw --raw --minimal --compact-summary master HEAD`'" >> $GITHUB_ENV
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically

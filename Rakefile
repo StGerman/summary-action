@@ -22,11 +22,13 @@ task :diff, [:base, :head] do |_t, args|
 end
 
 desc "Generate a summary from the input"
-task :summary, [:input] do |_t, args|
+task :summary_by_input, [:input] do |_t, args|
   input = ENV["summary_input"] || args[:input]
 
   require_relative "lib/summary_action/generate"
-  summary = SummaryAction::Generate.call(input)
+  require_relative "lib/open_ai/summary"
+  agent = OpenAI::Summary.new
+  summary = SummaryAction::Generate.call(input, agent:)
 
   summary.split("\n").each { |line| puts line }
 end
@@ -37,7 +39,8 @@ task :summary do |_t|
   require_relative "lib/open_ai/summary"
 
   diff_output = SummaryAction::Diff.call("master", "HEAD")
-  summary = SummaryAction::Generate.call(diff_output)
+  agent = OpenAI::Summary.new
+  summary = SummaryAction::Generate.call(diff_output, agent:)
 
   summary.split("\n").each { |line| puts line }
 end
