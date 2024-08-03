@@ -6,7 +6,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"model":"gpt-4o-mini","messages":[{"role":"user","content":"Translate
-        the following English text to French: \"Hello, world!\""}],"temperature":0.5}'
+        the following English text to Hebrew: \"Saturday, Hello!\""}],"temperature":0.5}'
     headers:
       Authorization:
       - Bearer <OPENAI_API_KEY>
@@ -24,7 +24,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Sat, 03 Aug 2024 11:35:24 GMT
+      - Sat, 03 Aug 2024 11:38:11 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -34,7 +34,7 @@ http_interactions:
       Openai-Organization:
       - user-pbqha1zhsdxkk80t86jp7jgo
       Openai-Processing-Ms:
-      - '477'
+      - '486'
       Openai-Version:
       - '2020-10-01'
       Strict-Transport-Security:
@@ -46,54 +46,32 @@ http_interactions:
       X-Ratelimit-Remaining-Requests:
       - '9999'
       X-Ratelimit-Remaining-Tokens:
-      - '199967'
+      - '199966'
       X-Ratelimit-Reset-Requests:
       - 8.64s
       X-Ratelimit-Reset-Tokens:
-      - 9ms
+      - 10ms
       X-Request-Id:
-      - req_38b8b0e53a2d6181e5d525f6b95804de
+      - req_0fd3fecca5e6d8b2c872e236822d43f7
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=sB4TE62KHM.1f93xUZpEYdiB2AYVrZ6EN6iXCZrRJmA-1722684924-1.0.1.1-cH9NNDWDdc9MXLAzbU59WJy109.FOUOQrdIm6S_YO0JMxpR1b0Y9yhpY0bU2phMz2SR1RqJyUbMy7MA4nvfhgg;
-        path=/; expires=Sat, 03-Aug-24 12:05:24 GMT; domain=.api.openai.com; HttpOnly;
+      - __cf_bm=cPWVDXuR3z4_53DuTgkFoDEFan4poppZbsJxxYqR560-1722685091-1.0.1.1-2GM57Czt.xts2FmhBwlRco01VbIHpBM3SapcPbGxDxAkBYKWuso8pQ8C.Wg_vM_rHxJUmTTaxsjFj.pi6V9bcw;
+        path=/; expires=Sat, 03-Aug-24 12:08:11 GMT; domain=.api.openai.com; HttpOnly;
         Secure; SameSite=None
-      - _cfuvid=C1t4LXNriuWXZF1SKOEXVC7cPQEah2cr9.LwZ4fpjHw-1722684924834-0.0.1.1-604800000;
+      - _cfuvid=4V7zSXcj49ydmJgwxXB9KyXjKE1wBISTqWRi.AFVsa8-1722685091988-0.0.1.1-604800000;
         path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
       X-Content-Type-Options:
       - nosniff
       Server:
       - cloudflare
       Cf-Ray:
-      - 8ad601064a7009c3-HFA
+      - 8ad6051a6e3709c1-HFA
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
-      string: |
-        {
-          "id": "chatcmpl-9s7KebDFFY2r2bmv19XE2C2sLTShD",
-          "object": "chat.completion",
-          "created": 1722684924,
-          "model": "gpt-4o-mini-2024-07-18",
-          "choices": [
-            {
-              "index": 0,
-              "message": {
-                "role": "assistant",
-                "content": "\"Bonjour, le monde !\""
-              },
-              "logprobs": null,
-              "finish_reason": "stop"
-            }
-          ],
-          "usage": {
-            "prompt_tokens": 20,
-            "completion_tokens": 6,
-            "total_tokens": 26
-          },
-          "system_fingerprint": "fp_9b0abffe81"
-        }
-  recorded_at: Sat, 03 Aug 2024 11:35:26 GMT
+      string: !binary |-
+        ewogICJpZCI6ICJjaGF0Y21wbC05czdOTGJ4R09MeDJ2Y1RSQXQ5c2NVU1AxQnRNYiIsCiAgIm9iamVjdCI6ICJjaGF0LmNvbXBsZXRpb24iLAogICJjcmVhdGVkIjogMTcyMjY4NTA5MSwKICAibW9kZWwiOiAiZ3B0LTRvLW1pbmktMjAyNC0wNy0xOCIsCiAgImNob2ljZXMiOiBbCiAgICB7CiAgICAgICJpbmRleCI6IDAsCiAgICAgICJtZXNzYWdlIjogewogICAgICAgICJyb2xlIjogImFzc2lzdGFudCIsCiAgICAgICAgImNvbnRlbnQiOiAiXCLXqdec15XXnSwg16nXkdeqXCIiCiAgICAgIH0sCiAgICAgICJsb2dwcm9icyI6IG51bGwsCiAgICAgICJmaW5pc2hfcmVhc29uIjogInN0b3AiCiAgICB9CiAgXSwKICAidXNhZ2UiOiB7CiAgICAicHJvbXB0X3Rva2VucyI6IDIwLAogICAgImNvbXBsZXRpb25fdG9rZW5zIjogNSwKICAgICJ0b3RhbF90b2tlbnMiOiAyNQogIH0sCiAgInN5c3RlbV9maW5nZXJwcmludCI6ICJmcF85YjBhYmZmZTgxIgp9Cg==
+  recorded_at: Sat, 03 Aug 2024 11:38:13 GMT
 recorded_with: VCR 6.2.0

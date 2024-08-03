@@ -6,7 +6,7 @@ module OpenAI
   # Create a Client for OpenAI API base on Faraday gem
   class Client < Faraday::Connection
     OPENAI_API_KEY = ENV.fetch("OPENAI_API_KEY").freeze
-    MODEL = "gpt-4o-mini".freeze
+    MODEL = "gpt-4o-mini"
     # Initialize the client with the API key
     def initialize
       super(url: "https://api.openai.com/v1") do |faraday|
@@ -20,10 +20,10 @@ module OpenAI
     # Send a request to the OpenAI API
     def send_request(prompt)
       post("chat/completions", {
-        model: MODEL,
-        messages: [{ role: "user", content: prompt }],
-        temperature: 0.5,
-      })
+             model: MODEL,
+             messages: [{ role: "user", content: prompt }],
+             temperature: 0.5
+           })
     end
   end
 end
