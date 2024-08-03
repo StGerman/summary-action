@@ -16,7 +16,7 @@ module SummaryAction
 
     def summary
       responce = summary_agent.send_request(@diff_output)
-      responce.success? ? responce.body.dig("choices")&.first&.dig("message", "content") : nil
+      responce&.success? ? responce.body["choices"]&.first&.dig("message", "content") : nil
     end
 
     private

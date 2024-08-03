@@ -9,8 +9,7 @@ RSpec.describe OpenAI::Summary do
   describe "#send_request", :vcr do
     let(:client) { described_class.new }
     let(:prompt) do
-      '
-      -expect(response.status).to eq(500)
+      '-expect(response.status).to eq(500)
       +expect(response.status).to eq(200)'
     end
 
