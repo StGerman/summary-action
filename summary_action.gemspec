@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary = "Provides a technical summary for the git diff"
   # spec.description = "TODO: Write a longer description or delete this line."
   # spec.homepage = "TODO: Put your gem's website or public repo URL here."
-  spec.required_ruby_version = ">= 3.0"
+  spec.required_ruby_version = "> 3.3"
 
   # # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
 
