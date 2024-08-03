@@ -12,14 +12,14 @@ jobs:
           fetch-depth: 0
       - name: Get the diff
         id: diff
-        run: echo "summary_input='`git diff --patch-with-raw --raw --minimal --compact-summary origin/master HEAD`'" >> $GITHUB_ENV
+        run: echo "summary_input='`git diff --patch-with-raw --raw --minimal --compact-summary origin/master HEAD`'" >> $GITHUB_OUTPUT
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - name: Generate summary
         id: summary
         run: |
-          echo "summary=`bundle exec rake summary`" >> $GITHUB_ENV
+          echo "summary=`bundle exec rake summary`" >> $GITHUB_OUTPUT
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       - name: Update PR Description
