@@ -13,10 +13,21 @@ task default: %i[spec rubocop]
 
 require_relative "lib/summary_action/diff"
 
-desc "Make a diff summary rake diff[master,HEAD]"
+desc "Generate the diff between two branches"
 task :diff, [:base, :head] do |_t, args|
   base = ENV["base"] || args[:base] || "master"
   head = ENV["head"] || args[:head] || "HEAD"
 
   SummaryAction::Diff.call(base, head)
+end
+
+desc "Generate a summary of the diff"
+task :summary do |_t|
+  require_relative "lib/summary_action/generate"
+  require_relative "lib/open_ai/summary"
+
+  diff_output = SummaryAction::Diff.call("master", "HEAD")
+  summary = SummaryAction::Generate.call(diff_output)
+
+  summary.split("\n").each { |line| puts line }
 end

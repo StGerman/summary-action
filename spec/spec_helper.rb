@@ -5,6 +5,15 @@ require "vcr"
 require "webmock/rspec"
 
 RSpec.configure do |config|
+  config.before do
+    VCR.configure do |c|
+      c.cassette_library_dir = "spec/fixtures/vcr_cassettes"
+      c.hook_into :webmock
+      c.configure_rspec_metadata!
+      c.filter_sensitive_data("<OPENAI_API_KEY>") { ENV.fetch("OPENAI_API_KEY", nil) }
+    end
+  end
+
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"
 
