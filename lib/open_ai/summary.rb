@@ -16,7 +16,7 @@ module OpenAI
         - Goal, Objective or Problem statement
         - List of requirements
         - Teams, assignees, status, timestamps
-        - References (if any available)
+        - List of references and links (if any available)
 
         It's crucial to include only information from the user input and nothing else. All opened questions should be listed in the document appendix
       PROMPT
