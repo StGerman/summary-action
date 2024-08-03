@@ -60,9 +60,9 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  rake (~> 13.0)
-  rspec (~> 3.0)
-  rubocop (~> 1.21)
+  rake
+  rspec
+  rubocop
   rubocop-rake
   rubocop-rspec
   summary_action!
