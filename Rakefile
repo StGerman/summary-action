@@ -21,6 +21,16 @@ task :diff, [:base, :head] do |_t, args|
   SummaryAction::Diff.call(base, head)
 end
 
+desc "Generate a summary from the input"
+task :summary, [:input] do |_t, args|
+  input = ENV["summary_input"] || args[:input]
+
+  require_relative "lib/summary_action/generate"
+  summary = SummaryAction::Generate.call(input)
+
+  summary.split("\n").each { |line| puts line }
+end
+
 desc "Generate a summary of the diff"
 task :summary do |_t|
   require_relative "lib/summary_action/generate"

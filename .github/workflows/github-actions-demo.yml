@@ -1,16 +1,34 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+# Documentation: https://docs.github.com/ru/actions
+# Workflow for updating PR description with AI summary
+name: AI Summary for Pull Request
+run-name: ${{ github.actor }} updating summary 📔
 on: [pull_request]
 jobs:
-  Explore-GitHub-Actions:
+  Update-PR-Description:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - run: |
-          git diff --patch-with-raw --raw --minimal --compact-summary origin/${{ github.base_ref }}..HEAD > diff.txt
-          echo "## Pull Request Diff" >> $GITHUB_STEP_SUMMARY
-          echo "```diff" >> $GITHUB_STEP_SUMMARY
-          cat diff.txt >> $GITHUB_STEP_SUMMARY
-          echo "```" >> $GITHUB_STEP_SUMMARY
+      - name: Get the diff
+        id: diff
+        run: echo "summary_input=`git diff --patch-with-raw --raw --minimal --compact-summary ${{ github.event.before }} ${{ github.sha }}`" >> $GITHUB_ENV
+      - uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+      - name: Generate summary
+        id: summary
+        run: |
+          echo "summary=`bundle exec rake summary`" >> $GITHUB_ENV
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      - uses: actions/upload-artifact@v2
+        with:
+          name: summary
+      - name: Update PR Description
+        uses: nefrob/pr-description@v1.1.2
+        if: steps.summary.outcome == 'success' && steps.diff.outcome == 'success'
+        with:
+          content: "summary input: ${{ env.summary_input }} : result ${{ env.summary }}"
+          contentIsFilePath: false
+          token: ${{ secrets.GITHUB_TOKEN }}
