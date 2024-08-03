@@ -1,3 +1,7 @@
+require:
+  - rubocop-rake
+  - rubocop-rspec
+
 AllCops:
   TargetRubyVersion: 3.3
   NewCops: enable
@@ -13,3 +17,6 @@ Style/StringLiteralsInInterpolation:
 
 Layout/LineLength:
   Max: 120
+
+RSpec/MultipleExpectations:
+  Enabled: false
