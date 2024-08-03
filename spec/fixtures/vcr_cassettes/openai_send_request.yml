@@ -1,0 +1,99 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: UTF-8
+      string: '{"model":"gpt-4o-mini","messages":[{"role":"user","content":"Translate
+        the following English text to French: \"Hello, world!\""}],"temperature":0.5}'
+    headers:
+      Authorization:
+      - Bearer <OPENAI_API_KEY>
+      User-Agent:
+      - Faraday v2.10.0
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Sat, 03 Aug 2024 11:35:24 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Openai-Organization:
+      - user-pbqha1zhsdxkk80t86jp7jgo
+      Openai-Processing-Ms:
+      - '477'
+      Openai-Version:
+      - '2020-10-01'
+      Strict-Transport-Security:
+      - max-age=15552000; includeSubDomains; preload
+      X-Ratelimit-Limit-Requests:
+      - '10000'
+      X-Ratelimit-Limit-Tokens:
+      - '200000'
+      X-Ratelimit-Remaining-Requests:
+      - '9999'
+      X-Ratelimit-Remaining-Tokens:
+      - '199967'
+      X-Ratelimit-Reset-Requests:
+      - 8.64s
+      X-Ratelimit-Reset-Tokens:
+      - 9ms
+      X-Request-Id:
+      - req_38b8b0e53a2d6181e5d525f6b95804de
+      Cf-Cache-Status:
+      - DYNAMIC
+      Set-Cookie:
+      - __cf_bm=sB4TE62KHM.1f93xUZpEYdiB2AYVrZ6EN6iXCZrRJmA-1722684924-1.0.1.1-cH9NNDWDdc9MXLAzbU59WJy109.FOUOQrdIm6S_YO0JMxpR1b0Y9yhpY0bU2phMz2SR1RqJyUbMy7MA4nvfhgg;
+        path=/; expires=Sat, 03-Aug-24 12:05:24 GMT; domain=.api.openai.com; HttpOnly;
+        Secure; SameSite=None
+      - _cfuvid=C1t4LXNriuWXZF1SKOEXVC7cPQEah2cr9.LwZ4fpjHw-1722684924834-0.0.1.1-604800000;
+        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      X-Content-Type-Options:
+      - nosniff
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8ad601064a7009c3-HFA
+      Alt-Svc:
+      - h3=":443"; ma=86400
+    body:
+      encoding: ASCII-8BIT
+      string: |
+        {
+          "id": "chatcmpl-9s7KebDFFY2r2bmv19XE2C2sLTShD",
+          "object": "chat.completion",
+          "created": 1722684924,
+          "model": "gpt-4o-mini-2024-07-18",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "\"Bonjour, le monde !\""
+              },
+              "logprobs": null,
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 20,
+            "completion_tokens": 6,
+            "total_tokens": 26
+          },
+          "system_fingerprint": "fp_9b0abffe81"
+        }
+  recorded_at: Sat, 03 Aug 2024 11:35:26 GMT
+recorded_with: VCR 6.2.0
