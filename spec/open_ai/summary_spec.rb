@@ -1,24 +1,27 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 require_relative "../../lib/open_ai/summary"
-require 'vcr'
-require 'webmock/rspec'
+require "vcr"
+require "webmock/rspec"
 
 RSpec.describe OpenAI::Summary do
   before do
     VCR.configure do |config|
-      config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+      config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
       config.hook_into :webmock
       config.configure_rspec_metadata!
-      config.filter_sensitive_data('<OPENAI_API_KEY>') { ENV['OPENAI_API_KEY'] }
+      config.filter_sensitive_data("<OPENAI_API_KEY>") { ENV.fetch("OPENAI_API_KEY", nil) }
     end
   end
 
   describe "#send_request", :vcr do
     let(:client) { described_class.new }
-    let(:prompt) { '
+    let(:prompt) do
+      '
       -expect(response.status).to eq(500)
       +expect(response.status).to eq(200)'
-    }
+    end
 
     it "successfully sends a request to the OpenAI API" do
       VCR.use_cassette("openai_summary_request") do

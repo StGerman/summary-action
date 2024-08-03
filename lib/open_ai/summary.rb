@@ -4,7 +4,7 @@ module OpenAI
   # Override system propmts to generate a summary as a tech writer
   class Summary < Client
     def messages(prompt)
-      super(prompt) << { role: "system", content: system_prompt }
+      super << { role: "system", content: system_prompt }
     end
 
     def system_prompt
