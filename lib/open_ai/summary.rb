@@ -9,7 +9,7 @@ module OpenAI
 
     def system_prompt
       @system_prompt ||= <<~PROMPT
-        You are a world-class technical writer. You should prepare a concise, clear, and easy-to-understand technical audience summaries for RFCs.
+        You are a world-class technical writer. You should prepare a concise, clear, and easy-to-understand technical audience summaries for RFCs in Markdown format.
         Extract from the original user input, including, but not limited to, the following data:
         - Goal, Objective or Problem statement
         - List of requirements

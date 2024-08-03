@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require "open_ai/client"
+require_relative "../open_ai/client"
+require "pry"
 
 module SummaryAction
   # Take the diff output and generate a summary
@@ -14,15 +15,14 @@ module SummaryAction
     end
 
     def summary
-      @diff_output.split("\n").each do |line|
-        puts line if line.start_with?("+", "-")
-      end
+      responce = summary_agent.send_request(@diff_output)
+      responce.success? ? responce.body.dig("choices")&.first&.dig("message", "content") : nil
     end
 
     private
 
-    def chat_gpt_client
-      @chat_gpt_client ||= OpenAI::Client.new(ENV.fetch("OPENAI_API_KEY"))
+    def summary_agent
+      @summary_agent ||= OpenAI::Summary.new
     end
   end
 end
