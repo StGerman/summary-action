@@ -27,9 +27,18 @@ module OpenAI
     def send_request(prompt)
       post("chat/completions", {
              model: MODEL,
-             messages: [{ role: "user", content: prompt }],
+             messages: messages(prompt),
              temperature: 0.5
            })
+    end
+
+    def messages(prompt)
+      [
+        {
+          role: "user",
+          content: prompt
+        }
+      ]
     end
   end
 end
