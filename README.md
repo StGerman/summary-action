@@ -1,33 +1,59 @@
-# SummaryAction
+# Source Code Summary Generator
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/summary_action`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Purpose
+This project provides a tool to generate a summary of the source code changes in a repository. It includes a Makefile to automate the generation of a diff file and a summary of those changes.
 
-TODO: Delete this and the text above, and describe your gem
+## Features
+- Generates a diff between the current branch and the `origin/master` branch.
+- Creates a summary of the diff using a Python script.
 
-## Installation
+## Getting Started
 
-Install the gem and add to the application's Gemfile by executing:
+### Prerequisites
+- Python 3.x
+- Git
+- OpenAI API Key
 
-    $ bundle add summary_action
+### Installation
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/your-username/repo-name.git
+    cd repo-name
+    ```
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+2. Install the required Python packages:
+    ```bash
+    pip install openai
+    ```
 
-    $ gem install summary_action
+3. Set up the OpenAI API key:
+    ```bash
+    export OPENAI_API_KEY=your_api_key_here
+    ```
 
-## Usage
+### Usage
 
-TODO: Write usage instructions here
+1. Generate a diff file:
+    ```bash
+    make diff
+    ```
 
-## Development
+2. Create a summary of the diff:
+    ```bash
+    make summary
+    ```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+### Makefile
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+The Makefile includes the following targets:
 
-## Contributing
+- `diff`: Generates a diff between the current branch and the `origin/master` branch and saves it to `diff.txt`.
+- `summary`: Depends on the `diff` target and runs a Python script `summary.py` with `diff.txt` as input to create a summary.
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/summary_action. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/summary_action/blob/main/CODE_OF_CONDUCT.md).
+### Example
 
-## Code of Conduct
+To generate a diff and create a summary, run:
 
-Everyone interacting in the SummaryAction project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/summary_action/blob/main/CODE_OF_CONDUCT.md).
+```bash
+make summary
+```

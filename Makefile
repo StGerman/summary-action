@@ -4,5 +4,8 @@
 diff:
 	git diff --patch-with-raw --raw --minimal --compact-summary origin/master HEAD > diff.txt
 
-summary:
-	./summary.sh diff.txt > summary.txt
+summary: diff
+	python3 summary.py diff.txt
+
+test:
+	python3 -m unittest discover -v
