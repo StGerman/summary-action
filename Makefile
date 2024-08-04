@@ -7,7 +7,7 @@ install:
 diff:
 	git diff --patch-with-raw --raw --minimal --compact-summary origin/master HEAD > diff.txt
 
-summary: diff
+summary:
 	python3 summary.py diff.txt
 
 lint:
