@@ -17,8 +17,8 @@ module OpenAI
         Extract from the original user input, including, but not limited to, the following data:
         - Problem statement and the goal of the code changes
         - List of requirements
-        - Teams, assignees, status, timestamps (if any)
-        - List of references and links (if any available)
+        - High-level overview of changes in mermaidjs diagrams
+        - List of references and links
 
         It's crucial to include only information from the user input and nothing else
       PROMPT
