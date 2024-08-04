@@ -32,4 +32,5 @@ jobs:
         with:
           content: summary.txt
           contentIsFilePath: true
+          regexFlags: s
           token: ${{ secrets.GITHUB_TOKEN }}
