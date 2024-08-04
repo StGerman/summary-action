@@ -14,7 +14,9 @@ jobs:
         run: make install
       - name: Generate summary
         id: summary
-        run: make summary > summary.txt
+        run: |
+          make diff > diff.txt
+          make summary > summary.txt
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       - name: Update PR Description
