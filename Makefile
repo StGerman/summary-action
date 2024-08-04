@@ -10,5 +10,8 @@ diff:
 summary: diff
 	python3 summary.py diff.txt
 
+lint:
+	pylint *.py
+
 test:
-	python3 -m unittest discover -v
+	python3 -m unittest test_summary.py

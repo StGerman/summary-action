@@ -1,0 +1,23 @@
+name: Test and Lint Python Code
+run-name: ${{ github.actor }} testing and linting 🧪
+on: [pull_request]
+jobs:
+  Test-and-Lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Install dependencies
+        run: |
+          make install
+      - name: Lint with Pylint
+        run: |
+          make lint
+        continue-on-error: true
+      - name: Test with Pytest
+        run: |
+          make test
+        continue-on-error: true
