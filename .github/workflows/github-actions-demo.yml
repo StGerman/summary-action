@@ -22,7 +22,7 @@ jobs:
         run: |
           echo  "`cat diff.txt`"
           export summary_input="`cat diff.txt | base64`"
-          echo `bundle exec rake summary_base64` > summary.txt
+          bundle exec rake summary_base64 > summary.txt
           echo $(cat summary.txt)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}

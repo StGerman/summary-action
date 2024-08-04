@@ -22,7 +22,7 @@ task :diff, [:base, :head] do |_t, args|
 end
 
 desc "Generate a summary from the input in base64"
-task :summary_base64, [:input] do |_t, args|
+task :summary_base64, [:input] do
   require_relative "lib/summary_action/generate"
   require_relative "lib/open_ai/summary"
   require "base64"
@@ -31,7 +31,7 @@ task :summary_base64, [:input] do |_t, args|
   agent = OpenAI::Summary.new
   summary = SummaryAction::Generate.call(input, agent:)
 
-  summary.split("\n").each { |line| puts line }
+  puts summary
 end
 
 desc "Generate a summary of the diff"
