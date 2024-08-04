@@ -13,14 +13,17 @@ jobs:
       - name: Get the diff
         id: diff
         run: |
-          export summary_input=$(git diff --patch-with-raw --raw --minimal --compact-summary origin/master HEAD | base64)
+          git diff --patch-with-raw --raw --minimal --compact-summary origin/master HEAD > diff.txt
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
       - name: Generate summary
         id: summary
         run: |
-          echo "`bundle exec rake summary_by_input`" >> $summary
+          echo  "`cat diff.txt`"
+          export summary_input="`cat diff.txt | Base64`"
+          echo `bundle exec rake summary_base64` > tee summary.txt
+          echo $(cat summary.txt)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       - name: Update PR Description

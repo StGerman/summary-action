@@ -21,12 +21,13 @@ task :diff, [:base, :head] do |_t, args|
   SummaryAction::Diff.call(base, head)
 end
 
-desc "Generate a summary from the input"
-task :summary_by_input, [:input] do |_t, args|
-  input = ENV["summary_input"] || args[:input]
-
+desc "Generate a summary from the input in base64"
+task :summary_base64, [:input] do |_t, args|
   require_relative "lib/summary_action/generate"
   require_relative "lib/open_ai/summary"
+  require "base64"
+  input = Base64.decode64(ENV.fetch("summary_input"))
+
   agent = OpenAI::Summary.new
   summary = SummaryAction::Generate.call(input, agent:)
 
