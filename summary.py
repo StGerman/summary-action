@@ -27,7 +27,7 @@ def generate_summary(diff_file_path):
 
     client = openai.OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
-    model_name = "gpt-4o-mini"
+    model_name = "gpt-4o"
 
     messages = [
         {
