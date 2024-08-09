@@ -16,7 +16,9 @@ jobs:
         id: summary
         run: |
           make diff > diff.txt
-          make summary > summary.txt
+          cat diff.txt
+          make summary --always-make > summary.txt
+          cat summary.txt
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       - name: Update PR Description
@@ -24,6 +26,7 @@ jobs:
         if: steps.summary.outcome == 'success'
         with:
           content: summary.txt
+          regex: 'code:summary'
           contentIsFilePath: true
           regexFlags: s
           token: ${{ secrets.GITHUB_TOKEN }}

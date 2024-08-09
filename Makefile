@@ -9,7 +9,7 @@ diff:
 	git diff --patch-with-raw --raw --minimal --compact-summary origin/master HEAD > diff.txt
 
 summary:
-	python3 src/summary.py diff.txt
+	poetry run python3 summary/generate.py diff.txt
 
 lint:
 	pylint **/*.py
