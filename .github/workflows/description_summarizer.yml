@@ -16,11 +16,11 @@ jobs:
         id: summary
         run: |
           make diff > diff.txt
-          cat diff.txt
-          make summary --always-make > summary.txt
+          make summary_gemini --always-make > summary.txt
           cat summary.txt
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       - name: Update PR Description
         uses: nefrob/pr-description@v1.1.2
         if: steps.summary.outcome == 'success'

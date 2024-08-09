@@ -9,7 +9,7 @@ def mock_env_openai_key(monkeypatch):
     """Set the OPENAI_API_KEY environment variable to a test value"""
     monkeypatch.setenv("OPENAI_API_KEY", "test_api_key")
 
-def test_generate_summary(_mock_env_openai_test_key):
+def test_generate_summary(mock_env_openai_key): # pylint: disable=redefined-outer-name
     """Test the generate_summary function"""
     diff_content = "This is a test diff content."
     system_prompt_content = "This is a test system prompt."
@@ -26,7 +26,7 @@ def test_generate_summary(_mock_env_openai_test_key):
         mock_response.choices = [MagicMock(message=MagicMock(content=expected_summary))]
         mock_openai_client.return_value.chat.completions.create.return_value = mock_response
 
-        result = generate_summary("diff.txt")
+        result = generate_summary("diff.txt", api_key="test_api_key")
 
         assert result == expected_summary
         mock_file.assert_any_call("diff.txt", "r", encoding="utf-8")
