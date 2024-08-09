@@ -2,7 +2,7 @@
 
 from unittest.mock import patch, mock_open, MagicMock
 import pytest
-from summary import generate_summary
+from summary.generate import generate_summary
 
 @pytest.fixture
 def mock_env_openai_key(monkeypatch):
