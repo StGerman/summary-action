@@ -14,3 +14,5 @@ diff.txt
 summary.txt
 __pycache__
 .venv
+gemini_ai_summary.txt
+open_ai_summary.txt
