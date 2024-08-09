@@ -1,0 +1,40 @@
+name: 'git summary action'
+description: 'This action updates PR description with AI summary'
+inputs:
+  provider:  # id of input
+    description: 'What LLM provider to use [openai|gemini] (default: openai)'
+    required: true
+    default: 'openai'
+  OPENAI_API_KEY:
+    description: 'LLM API key'
+    required: true
+outputs:
+  base64_generated_summary:
+    description: "Summarized description in base64 format"
+    value: ${{ steps.summary.outputs.base64_generated_summary }}
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Install dependencies
+      run: make install
+    - name: Generate summary
+      id: summary
+      run: |
+        make diff > diff.txt
+        make summary_gemini --always-make > summary.txt
+        echo "base64_generated_summary=$(cat summary.txt | base64)" >> $GITHUB_OUTPUT
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    - name: Update PR Description
+      uses: nefrob/pr-description@v1.1.2
+      if: steps.summary.outcome == 'success'
+      with:
+        content: summary.txt
+        regex: 'code:summary'
+        contentIsFilePath: true
+        regexFlags: s
+        token: ${{ secrets.GITHUB_TOKEN }}
