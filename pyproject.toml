@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "github-action-summary"
+version = "0.2.0"
+description = "generating summary for code diff"
+authors = ["Stas German <stas.german@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+openai = "^1.40.2"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.2.6"
+pytest = "^8.3.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
