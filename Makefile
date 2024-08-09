@@ -9,10 +9,13 @@ diff:
 	git diff --patch-with-raw --raw --minimal --compact-summary origin/master HEAD > diff.txt
 
 summary:
-	poetry run python3 summary/generate.py diff.txt
+	poetry run python3 summary/generate.py diff.txt openai
+
+summary_gemini:
+	poetry run python3 summary/generate.py diff.txt gemini
 
 lint:
-	poetry run pylint **/*.py
+	poetry run pylint --ignore-patterns=test_.*?py **/*.py
 
 test:
 	poetry run pytest

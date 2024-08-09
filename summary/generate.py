@@ -8,33 +8,35 @@ Usage: python summary.py <user_input_file>
 import os
 import sys
 import openai
+import google.generativeai as genai
 
+def gemini_summary(api_key, user_input, system_prompt):
+    """
+    Generates a summary using the Gemini API.
+    Args:
+        api_key (str): The OpenAI API key.
+        user_input (str): The user input to summarize.
+        system_prompt (str): The system prompt to use for summarization.
+    Returns:
+        str: The generated summary of the user input.
+    """
 
-# def gemini_summary(api_key, _user_input, _system_prompt):
-#     """
-#     Generates a summary using the Gemini API.
-#     Args:
-#         api_key (str): The OpenAI API key.
-#         user_input (str): The user input to summarize.
-#         system_prompt (str): The system prompt to use for summarization.
-#     Returns:
-#         str: The generated summary of the user input.
-#     """
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel(
+        model_name="gemini-1.5-pro",
+        system_instruction=system_prompt
+        )
 
-#     genai.configure(api_key=api_key)
-#     model = genai.GenerativeModel('gemini-1.5-pro-latest')
-#     response = model.generate_content(
-#         "Tell me a story about a dark magic code",
-#         generation_config=genai.types.GenerationConfig(
-#             # Only one candidate for now.
-#             candidate_count=1,
-#             stop_sequences=["x"],
-#             max_output_tokens=20,
-#             temperature=1.0,
-#         ),
-#     )
+    response = model.generate_content(
+        user_input,
+        generation_config=genai.types.GenerationConfig(
+            candidate_count=1,
+            max_output_tokens=2000,
+            temperature=0.3,
+        ),
+    )
 
-#     return response.text
+    return response.text
 
 def openai_summary(api_key, user_input, system_prompt):
     """
@@ -86,20 +88,30 @@ def generate_summary(diff_file_path, api_key, provider="openai"):
         return openai_summary(api_key, user_input, system_prompt)
 
     if provider == "gemini":
-        raise NotImplementedError("Gemini API is not yet implemented.")
+        return gemini_summary(api_key, user_input, system_prompt)
 
     raise ValueError(f"Invalid provider: {provider}")
 
 if __name__ == "__main__":
     # Ensure the correct number of command-line arguments
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 3:
         print("Usage: python script.py <user_input_file>")
         sys.exit(1)
 
     # Get the user input file path from the command-line arguments
     diff_file = sys.argv[1]
+    provider = sys.argv[2]
 
     # Get the OpenAI API key from the environment variables
     open_ai_api_key = os.environ.get("OPENAI_API_KEY")
-    summary = generate_summary(diff_file, open_ai_api_key, provider="openai")
+    gemini_api_key = os.environ.get("GEMINI_API_KEY")
+
+    if provider == "openai":
+        summary = generate_summary(diff_file, open_ai_api_key, provider="openai")
+    elif provider == "gemini":
+        summary = generate_summary(diff_file, gemini_api_key, provider="gemini")
+    else:
+        print("Invalid provider. Please provide either 'openai' or 'gemini'.")
+        sys.exit(1)
+
     print(summary)
