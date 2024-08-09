@@ -3,7 +3,7 @@
 # Date: 2024-08-04
 install:
 	pip3 install poetry > /dev/null
-	poetry install --no-root --quiet
+	poetry install --no-root
 
 diff:
 	git diff --patch-with-raw --raw --minimal --compact-summary origin/master HEAD > diff.txt

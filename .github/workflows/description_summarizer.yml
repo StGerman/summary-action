@@ -24,6 +24,7 @@ jobs:
         if: steps.summary.outcome == 'success'
         with:
           content: summary.txt
+          regex: 'code:summary'
           contentIsFilePath: true
           regexFlags: s
           token: ${{ secrets.GITHUB_TOKEN }}
