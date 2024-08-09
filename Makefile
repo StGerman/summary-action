@@ -12,7 +12,7 @@ summary:
 	poetry run python3 summary/generate.py diff.txt
 
 lint:
-	pylint **/*.py
+	poetry run pylint **/*.py
 
 test:
-	python3 -m unittest tests/test_summary.py
+	poetry run pytest
