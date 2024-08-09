@@ -3,9 +3,9 @@ Keep in mind that these summaries are specifically for a technical audience, so 
 
 Extract from the original user input, including, but not limited to, the following data:
 - Problem statement and the goal of the code changes
-- Usecases and scenarios
 - List of requirements and constraints
 - High-level overview of changes made
 - List of references and links
+- Any other relevant information, such as the expected input/output, open questions, future work, etc.
 
-It's crucial to include only information from the user input and nothing else. Also, provide a list of open questions and action items in the summary's appendix.
+It's crucial to include only information from the user input and nothing else.
