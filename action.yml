@@ -1,0 +1,44 @@
+name: "Generate Summary Action"
+description: "An action to generate a summary from a diff and update the PR description"
+
+inputs:
+  github_token:
+    description: GitHub access token.
+    required: true
+  openai_api_key:
+    description: "OpenAI API key"
+    required: false
+  gemini_api_key:
+    description: "Gemini API key"
+    required: false
+  provider:
+    description: "Provider to use for generating the summary"
+    required: true
+    default: "openai"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    - name: Install dependencies
+      run: make install
+      shell: bash
+    - name: Generate summary
+      id: summary
+      shell: bash
+      run: |
+        make diff > diff.txt
+        make summary_gemini --always-make > summary.txt
+      env:
+        OPENAI_API_KEY: ${{ inputs.openai_api_key }}
+        GEMINI_API_KEY: ${{ inputs.gemini_api_key }}
+    - name: Update PR Description
+      uses: nefrob/pr-description@v1.1.2
+      with:
+        content: summary.txt
+        regex: "code:summary"
+        contentIsFilePath: true
+        regexFlags: s
+        token: ${{ inputs.github_token }}
