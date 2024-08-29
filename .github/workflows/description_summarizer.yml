@@ -11,7 +11,8 @@ jobs:
         with:
           fetch-depth: 0
       - id: summary
-        uses: StGerman/summary-action@v0.0.2
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        uses: StGerman/summary-action@v0.0.4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+          gemini_api_key: ${{ secrets.GEMINI_API_KEY }}

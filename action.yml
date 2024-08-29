@@ -1,6 +1,21 @@
 name: "Generate Summary Action"
 description: "An action to generate a summary from a diff and update the PR description"
 
+inputs:
+  github_token:
+    description: GitHub access token.
+    required: true
+  openai_api_key:
+    description: "OpenAI API key"
+    required: false
+  gemini_api_key:
+    description: "Gemini API key"
+    required: false
+  provider:
+    description: "Provider to use for generating the summary"
+    required: true
+    default: "openai"
+
 outputs:
   base64_generated_summary:
     description: "Summarized description in base64 format"
@@ -12,7 +27,6 @@ runs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-      shell: bash
     - name: Install dependencies
       run: make install
       shell: bash
@@ -24,14 +38,14 @@ runs:
         make summary_gemini --always-make > summary.txt
         echo "base64_generated_summary=$(cat summary.txt | base64)" >> $GITHUB_OUTPUT
       env:
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        OPENAI_API_KEY: ${{ inputs.openai_api_key }}
+        GEMINI_API_KEY: ${{ inputs.gemini_api_key }}
     - name: Update PR Description
       uses: nefrob/pr-description@v1.1.2
       if: steps.summary.outcome == 'success'
       with:
         content: summary.txt
-        regex: 'code:summary'
+        regex: "code:summary"
         contentIsFilePath: true
         regexFlags: s
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ inputs.github_token }}
