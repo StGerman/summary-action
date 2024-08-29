@@ -16,11 +16,6 @@ inputs:
     required: true
     default: "openai"
 
-outputs:
-  base64_generated_summary:
-    description: "Summarized description in base64 format"
-    value: ${{ steps.summary.outputs.base64_generated_summary }}
-
 runs:
   using: "composite"
   steps:
@@ -36,13 +31,11 @@ runs:
       run: |
         make diff > diff.txt
         make summary_gemini --always-make > summary.txt
-        echo "base64_generated_summary=$(cat summary.txt | base64)" >> $GITHUB_OUTPUT
       env:
         OPENAI_API_KEY: ${{ inputs.openai_api_key }}
         GEMINI_API_KEY: ${{ inputs.gemini_api_key }}
     - name: Update PR Description
       uses: nefrob/pr-description@v1.1.2
-      if: steps.summary.outcome == 'success'
       with:
         content: summary.txt
         regex: "code:summary"

@@ -11,7 +11,7 @@ jobs:
         with:
           fetch-depth: 0
       - id: summary
-        uses: StGerman/summary-action@v0.0.4
+        uses: StGerman/summary-action@v0.0.5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
