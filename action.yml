@@ -1,4 +1,4 @@
-name: "Generate Summary Action"
+name: "AI Summary for Pull Request"
 description: "An action to generate a summary from a diff and update the PR description"
 
 inputs:
@@ -15,7 +15,13 @@ inputs:
     description: "Provider to use for generating the summary"
     required: true
     default: "openai"
-
+  regex:
+    description: "Regex to use for finding the summary placeholder in the PR description"
+    required: false
+    default: "code:summary"
+  system_prompt:
+    description: "System prompt to use for generating the summary"
+    required: false
 runs:
   using: "composite"
   steps:
@@ -30,8 +36,10 @@ runs:
       shell: bash
       run: |
         make diff > diff.txt
-        make summary_gemini --always-make > summary.txt
+        make summary --always-make > summary.txt
       env:
+        PROVIDER: ${{ inputs.provider }}
+        SYSTEM_PROMPT: ${{ inputs.system_prompt }}
         OPENAI_API_KEY: ${{ inputs.openai_api_key }}
         GEMINI_API_KEY: ${{ inputs.gemini_api_key }}
     - name: Update PR Description

@@ -70,7 +70,7 @@ def openai_summary(api_key, user_input, system_prompt):
 
     return response.choices[0].message.content
 
-def generate_summary(diff_file_path, api_key, provider="openai"):
+def generate_summary(diff_file_path, api_key, provider="openai", system_prompt=None):
     """
     Generates a summary of the user input provided in the diff file.
     The user input is combined with a system prompt to generate a summary using the OpenAI API.
@@ -82,8 +82,10 @@ def generate_summary(diff_file_path, api_key, provider="openai"):
     with open(diff_file_path, "r", encoding="utf-8") as f:
         user_input = f.read()
 
-    with open("system_prompt.txt", "r", encoding="utf-8") as f:
-        system_prompt = f.read()
+    # Load the system prompt from the file if not provided
+    if system_prompt is None:
+        with open("system_prompt.mdown", "r", encoding="utf-8") as f:
+            system_prompt = f.read()
 
     if provider == "openai":
         return openai_summary(api_key, user_input, system_prompt)
@@ -106,11 +108,22 @@ if __name__ == "__main__":
     # Get the OpenAI API key from the environment variables
     open_ai_api_key = os.environ.get("OPENAI_API_KEY")
     gemini_api_key = os.environ.get("GEMINI_API_KEY")
+    custom_system_prompt = os.environ.get("SYSTEM_PROMPT")
 
     if provider == "openai":
-        summary = generate_summary(diff_file, open_ai_api_key, provider="openai")
+        summary = generate_summary(
+            diff_file,
+            open_ai_api_key,
+            provider="openai",
+            system_prompt=custom_system_prompt
+        )
     elif provider == "gemini":
-        summary = generate_summary(diff_file, gemini_api_key, provider="gemini")
+        summary = generate_summary(
+            diff_file,
+            gemini_api_key,
+            provider="gemini",
+            system_prompt=custom_system_prompt
+        )
     else:
         print("Invalid provider. Please provide either 'openai' or 'gemini'.")
         sys.exit(1)
