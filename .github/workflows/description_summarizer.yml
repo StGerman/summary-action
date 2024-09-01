@@ -1,18 +1,16 @@
 # Documentation: https://docs.github.com/ru/actions
 # Workflow for updating PR description with AI summary
 name: AI Summary for Pull Request
-run-name: ${{ github.actor }} updating summary 📔
+run-name: ${{ github.actor }} updating your summary 📔
 on: [pull_request]
 jobs:
   Update-PR-Description:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - id: summary
         uses: StGerman/summary-action@v0.0.5
         with:
+          provider: openai
           github_token: ${{ secrets.GITHUB_TOKEN }}
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
