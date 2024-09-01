@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: summary
-        uses: StGerman/summary-action@v0.0.5
+        uses: StGerman/summary-action@v0.0.6
         with:
           provider: openai
           github_token: ${{ secrets.GITHUB_TOKEN }}
