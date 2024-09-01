@@ -82,7 +82,7 @@ def generate_summary(diff_file_path, api_key, provider="openai"):
     with open(diff_file_path, "r", encoding="utf-8") as f:
         user_input = f.read()
 
-    with open("system_prompt.txt", "r", encoding="utf-8") as f:
+    with open("system_prompt.mdown", "r", encoding="utf-8") as f:
         system_prompt = f.read()
 
     if provider == "openai":

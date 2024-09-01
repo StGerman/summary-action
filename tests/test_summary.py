@@ -30,7 +30,7 @@ def test_generate_summary(mock_env_openai_key): # pylint: disable=redefined-oute
 
         assert result == expected_summary
         mock_file.assert_any_call("diff.txt", "r", encoding="utf-8")
-        mock_file.assert_any_call("system_prompt.txt", "r", encoding="utf-8")
+        mock_file.assert_any_call("system_prompt.mdown", "r", encoding="utf-8")
         mock_openai_client.assert_called_with(api_key="test_api_key")
         mock_openai_client.return_value.chat.completions.create.assert_called_once_with(
             model="gpt-4o-mini",

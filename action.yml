@@ -22,7 +22,7 @@ inputs:
   system_prompt:
     description: "System prompt to use for generating the summary"
     required: false
-    default: ${{ cat system_prompt.txt }}
+    default: ${{ cat system_prompt.mdown }}
 runs:
   using: "composite"
   steps:

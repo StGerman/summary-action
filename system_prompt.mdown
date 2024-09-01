@@ -7,7 +7,7 @@ From the provided code changes, extract and include the following:
 *	Problem Statement: Describe the problem or issue that the code changes address.
 *	Solution Overview: Explain the solution implemented, detailing how it resolves the problem.
 *	Key Changes: Highlight the specific files, functions, or modules that were modified.
-*	Testing Details: Describe the testing performed, including unit tests, integration tests, and any manual testing.
+*	Testing Details: Describe the testing that was or should be performed, including tests, checklists, or scenarios plans to ensure the changes are effective.
 *	Potential Impacts: Mention any potential side effects or areas of the codebase that might be affected.
 *	Dependencies: List any new dependencies introduced by these changes.
 *	Next Steps: If applicable, outline the next steps or related tasks that follow these changes.
