@@ -48,7 +48,7 @@ def openai_summary(api_key, user_input, system_prompt):
     Returns:
         str: The generated summary of the user input.
     """
-    raise NotImplementedError("OpenAI API is not available")
+
     client = openai.OpenAI(api_key=api_key)
 
     model_name = "gpt-4o-mini"
