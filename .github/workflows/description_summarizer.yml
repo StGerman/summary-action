@@ -14,3 +14,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           openai_api_key: ${{ secrets.OPENAI_API_KEY }}
           gemini_api_key: ${{ secrets.GEMINI_API_KEY }}
+          system_prompt: ${{ secrets.SYSTEM_PROMPT }}

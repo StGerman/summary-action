@@ -37,8 +37,10 @@ runs:
       shell: bash
       run: |
         make diff > diff.txt
-        make summary_gemini --always-make > summary.txt
+        make summary --always-make > summary.txt
       env:
+        PROVIDER: ${{ inputs.provider }}
+        SYSTEM_PROMPT: ${{ inputs.system_prompt }}
         OPENAI_API_KEY: ${{ inputs.openai_api_key }}
         GEMINI_API_KEY: ${{ inputs.gemini_api_key }}
     - name: Update PR Description

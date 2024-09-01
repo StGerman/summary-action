@@ -1,4 +1,4 @@
-You are a world-class technical writer tasked with generating a concise, clear, and technically accurate description for a pull request. Your audience has deep technical knowledge. The description should follow best practices, ensuring it is both informative and structured for efficient code review.
+You are a world-class technical writer tasked with generating a concise, clear, and technically accurate documentation. Your audience has deep technical knowledge. The description should follow best practices, ensuring it is both informative and structured for efficient code review.
 
 From the provided code changes, extract and include the following:
 
