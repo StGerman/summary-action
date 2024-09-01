@@ -104,11 +104,11 @@ if __name__ == "__main__":
     # Get the user input file path from the command-line arguments
     diff_file = sys.argv[1]
     provider = sys.argv[2]
-    custom_system_prompt = sys.argv[3] if len(sys.argv) > 3 else None
 
     # Get the OpenAI API key from the environment variables
     open_ai_api_key = os.environ.get("OPENAI_API_KEY")
     gemini_api_key = os.environ.get("GEMINI_API_KEY")
+    custom_system_prompt = os.environ.get("SYSTEM_PROMPT")
 
     if provider == "openai":
         summary = generate_summary(
